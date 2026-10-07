@@ -13,8 +13,9 @@
 2. **Vercel에 저장소 연결**
    [vercel.com](https://vercel.com)에 GitHub 계정으로 가입 → **Add New → Project** → `myeongsik` 저장소 **Import**.
    Framework Preset은 **Other**, Build Command와 Output Directory는 비워 둡니다.
-3. **환경 변수 입력**
+3. **환경 변수 입력 (선택)**
    같은 화면의 Environment Variables에 `ANTHROPIC_API_KEY` = (1번 키)를 넣고 **Deploy**.
+   키 없이 배포해도 사이트는 모두 작동하고, AI 풀이 버튼만 "준비 중"으로 표시됩니다. 나중에 키를 넣은 뒤 **Deployments → Redeploy** 하면 AI 풀이가 켜집니다.
 4. 배포가 끝나면 `https://myeongsik-xxxx.vercel.app` 주소가 생깁니다. 폰으로 열어 AI 풀이까지 되는지 확인하세요.
 
 이후 `main` 브랜치에 푸시할 때마다 자동으로 다시 배포됩니다.

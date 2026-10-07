@@ -101,3 +101,17 @@ test('GET은 405', async () => {
   const r = await fetch(base + '/api/reading');
   assert.strictEqual(r.status, 405);
 });
+
+test('상태 API는 AI 사용 가능 여부만 알려 준다', async () => {
+  const j = await (await fetch(base + '/api/status')).json();
+  assert.deepStrictEqual(j, { ai: true });
+});
+
+test('API 키가 없으면 풀이 요청은 503 안내', async () => {
+  const key = process.env.ANTHROPIC_API_KEY; delete process.env.ANTHROPIC_API_KEY;
+  const r = await post({ kind: 'saju', topic: 'total', me }, '10.0.0.7');
+  const j = await (await fetch(base + '/api/status')).json();
+  process.env.ANTHROPIC_API_KEY = key;
+  assert.strictEqual(r.status, 503);
+  assert.deepStrictEqual(j, { ai: false });
+});

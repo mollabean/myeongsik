@@ -65,7 +65,7 @@
         <div><span class="label">${t.hangul}일 · ${t.stemGod}의 날</span><p class="today-head">${g[1]}</p></div></div>
       <dl class="dodont"><div><dt>키워드</dt><dd>${g[0]} · ${t.branchGod}</dd></div><div><dt>살필 점</dt><dd>${g[2]}</dd></div></dl>
       ${rels.length ? `<div class="chips">${rels.map(r => `<span class="chip ${r.good ? 'good' : 'bad'}">${esc(r.t)}</span>`).join('')}</div>` : ''}
-      <button class="btn sec-btn" type="button" data-read="today">AI 오늘 한마디</button>`;
+      <button class="btn sec-btn" type="button" data-read="today">AI 오늘 한마디${aiReady === false ? ' (준비 중)' : ''}</button>`;
     const dm = A.pillars.day;
     $('#meCard').innerHTML = `<span class="hj big el-${dm.stemElement}">${S.STEMS[dm.stem]}</span>
       <div><span class="label">나의 일간 · ${S.STEMS_KO[dm.stem]}${ELK[dm.stemElement]}</span><p style="margin:2px 0 0">${DM_TEXT[dm.stem]}</p></div>`;
@@ -152,12 +152,13 @@
 
   // ----- 탭 -----
   const VIEWS = ['today', 'saju', 'gung', 'year'];
+  let aiReady = null; // null: 확인 중, false: 서버에 AI 키 없음
   const CTA = { saju: 'AI 사주 풀이 보기', gung: 'AI 궁합 풀이 보기', year: 'AI 2027 운세 풀이 보기' };
   let view = 'today';
   function go(v, scroll = true) {
     view = v;
     VIEWS.forEach(k => { $(`#v-${k}`).hidden = k !== v; $(`#tb-${k}`).setAttribute('aria-selected', k === v); });
-    $('#cta').hidden = !CTA[v]; $('#ctaBtn').textContent = CTA[v] || '';
+    $('#cta').hidden = !CTA[v]; $('#ctaBtn').textContent = CTA[v] ? CTA[v] + (aiReady === false ? ' (준비 중)' : '') : '';
     if (scroll) window.scrollTo(0, 0);
     if (v === 'saju') { const n = document.querySelector('.du[data-now]'); if (n) n.parentElement.scrollLeft = Math.max(0, n.offsetLeft - 16 - 76); }
     store.set('saju.tab', v);
@@ -306,15 +307,22 @@
     $('#rdTopics').hidden = cfg.topics.length < 2;
     $('#rdTopics').innerHTML = cfg.topics.map(([k, l]) => `<button type="button" class="topic" data-k="${k}" aria-pressed="${k === rd.topic}">${l}</button>`).join('');
     openSheet($('#reader'));
+    if (aiReady === false) return showComingSoon();
     ask(false);
   }
   $('#rdTopics').addEventListener('click', e => {
     const b = e.target.closest('.topic'); if (!b) return;
     abortRead(); rd.topic = b.dataset.k;
     $('#rdTopics').querySelectorAll('.topic').forEach(x => x.setAttribute('aria-pressed', x === b));
+    if (aiReady === false) return showComingSoon();
     ask(false);
   });
+  function showComingSoon() {
+    $('#rdAnswer').innerHTML = '<p class="wait">AI 풀이는 곧 열립니다. 지금은 사주 원국, 궁합 점수와 근거, 2027 월별 흐름을 무료로 볼 수 있습니다.</p>';
+    $('#rdStatus').textContent = ''; $('#rdStop').hidden = true; $('#rdAsk').hidden = true;
+  }
   async function ask(fresh) {
+    $('#rdAsk').hidden = false;
     const body = requestBody(), key = hash(JSON.stringify(body) + (rd.kind === 'today' ? `${TODAY.year}-${TODAY.month}-${TODAY.day}` : ''));
     const cached = !fresh && cacheGet(key);
     $('#rdStatus').textContent = '';
@@ -397,4 +405,5 @@
   const h0 = location.hash.slice(1), saved = store.get('saju.tab');
   go(VIEWS.includes(h0) ? h0 : VIEWS.includes(saved) ? saved : 'today', false);
   $('#shareBtn').hidden = !document.createElement('canvas').toBlob;
+  fetch('/api/status').then(r => r.json()).then(j => { aiReady = !!j.ai; }).catch(() => { aiReady = true; }).finally(() => { renderToday(); go(view, false); });
 })();

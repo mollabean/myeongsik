@@ -7,6 +7,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const reading = require('../api/reading.js');
+const status = require('../api/status.js');
 
 const ROOT = path.join(__dirname, '..', 'public');
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.webmanifest': 'application/manifest+json', '.png': 'image/png' };
@@ -15,6 +16,7 @@ function createServer() {
   return http.createServer(async (req, res) => {
     const url = new URL(req.url, 'http://localhost');
     if (url.pathname === '/api/reading') return reading(req, res);
+    if (url.pathname === '/api/status') return status(req, res);
     let file = path.normalize(path.join(ROOT, decodeURIComponent(url.pathname)));
     if (!file.startsWith(ROOT)) { res.statusCode = 403; return res.end(); }
     if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
