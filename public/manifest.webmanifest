@@ -1,0 +1,10 @@
+{
+  "name": "명식 — 사주·궁합·신년운세",
+  "short_name": "명식",
+  "lang": "ko",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#eef0ec",
+  "theme_color": "#2e3b8a",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

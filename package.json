@@ -1,0 +1,15 @@
+{
+  "name": "myeongsik",
+  "version": "0.3.0",
+  "private": true,
+  "description": "명식 — 만세력 사주·궁합·2027 신년운세 웹서비스",
+  "license": "UNLICENSED",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "node scripts/dev-server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "astronomy-engine": "2.1.19"
+  }
+}

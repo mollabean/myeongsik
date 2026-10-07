@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>개인정보처리방침 — 명식</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/app.css">
+<style>
+  .doc { max-width: 680px; margin: 0 auto; padding-inline: 16px; padding-block: 24px 64px; font-size: .95rem; line-height: 1.8; }
+  .doc h1 { font-family: var(--font-display); font-size: 1.5rem; margin: 0 0 4px; }
+  .doc h2 { margin: 1.8em 0 .4em; font-size: 1.05rem; }
+  .doc table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  .doc th, .doc td { border: 1px solid var(--line); padding: 8px; text-align: left; vertical-align: top; }
+  .doc th { background: var(--sunken); }
+  .scroll { overflow-x: auto; }
+  .draft { background: var(--warn-bg); color: var(--warn); padding: 10px 12px; border-radius: 10px; font-size: .85rem; }
+</style>
+</head>
+<body>
+<main class="doc">
+  <p><a href="/">← 명식으로 돌아가기</a></p>
+  <h1>개인정보처리방침</h1>
+  <p class="muted">시행일: [시행일을 적어 주세요]</p>
+  <p class="draft">이 문서는 초안입니다. 운영자 정보와 연락처를 채우고, 서비스를 공개하기 전에 전문가 검토를 받으세요.</p>
+
+  <p>[운영자 이름](이하 “운영자”)은 사주 풀이 서비스 “명식”(이하 “서비스”)을 운영하며, 「개인정보 보호법」에 따라 이용자의 개인정보를 보호하고 관련 고충을 처리하기 위해 다음과 같이 개인정보처리방침을 둡니다.</p>
+
+  <h2>1. 처리하는 개인정보와 목적</h2>
+  <div class="scroll"><table>
+    <tr><th>항목</th><th>목적</th><th>저장 위치·보유 기간</th></tr>
+    <tr><td>호칭(선택), 성별, 생년월일(양력·음력), 출생 시각 또는 시진, 출생지(도시)</td><td>사주·궁합·신년운세 계산</td><td>이용자 기기의 브라우저 저장소에만 저장되며 운영자 서버에는 저장하지 않습니다. 이용자가 브라우저 데이터를 지우면 삭제됩니다.</td></tr>
+    <tr><td>위 항목과 선택한 풀이 주제 (궁합의 경우 상대방 정보 포함)</td><td>AI 풀이 생성</td><td>풀이를 요청할 때만 서버를 거쳐 AI 서비스 제공자에게 전송되며, 운영자 서버에는 저장하지 않습니다.</td></tr>
+    <tr><td>IP 주소</td><td>과도한 요청을 막기 위한 이용 횟수 제한</td><td>IP별 요청 횟수만 최대 1일 보관 후 자동 삭제합니다.</td></tr>
+    <tr><td>접속 기록(IP 주소, 브라우저 정보, 접속 시각)</td><td>서비스 운영과 보안</td><td>호스팅 업체의 시스템 로그에 해당 업체의 정책에 따라 일정 기간 보관될 수 있습니다.</td></tr>
+  </table></div>
+  <p>서비스는 회원가입을 받지 않으며, 이름·연락처·결제 정보를 수집하지 않습니다.</p>
+
+  <h2>2. 상대방 정보 입력 시 유의 사항</h2>
+  <p>궁합을 보기 위해 다른 사람의 생년월일 정보를 입력하는 경우, 입력하는 이용자는 그 사람에게 알리고 동의를 받은 뒤 이용해 주세요.</p>
+
+  <h2>3. 개인정보의 국외 이전</h2>
+  <p>서비스는 아래와 같이 개인정보를 국외로 이전합니다. 이전을 원하지 않으면 AI 풀이 기능을 사용하지 않으면 되며, 이 경우에도 사주·궁합·신년운세 계산은 기기 안에서 그대로 이용할 수 있습니다.</p>
+  <div class="scroll"><table>
+    <tr><th>받는 자</th><th>국가</th><th>이전 항목</th><th>이전 시점·방법</th><th>목적</th><th>보유 기간</th></tr>
+    <tr><td>Anthropic, PBC</td><td>미국</td><td>1번 표의 AI 풀이 항목</td><td>AI 풀이를 요청할 때, 암호화된 네트워크로 전송</td><td>AI 풀이 생성</td><td>받는 자의 API 데이터 보존 정책에 따름</td></tr>
+    <tr><td>Vercel Inc.</td><td>미국</td><td>AI 풀이 요청 내용(저장하지 않음), 접속 기록</td><td>서비스 접속 시</td><td>웹사이트 호스팅</td><td>받는 자의 정책에 따름</td></tr>
+    <tr><td>[이용 횟수 제한 저장소를 쓰는 경우: Upstash, Inc.]</td><td>[저장소 지역]</td><td>IP별 요청 횟수</td><td>AI 풀이 요청 시</td><td>이용 횟수 제한</td><td>최대 1일</td></tr>
+  </table></div>
+  <p>화면 글꼴을 불러오는 과정에서 이용자의 브라우저가 Google Fonts 서버에 접속합니다.</p>
+
+  <h2>4. 개인정보의 파기</h2>
+  <p>운영자는 생년월일 정보를 서버에 보관하지 않습니다. 기기에 저장된 정보는 서비스의 “수정” 화면에서 바꾸거나, 브라우저의 사이트 데이터를 삭제하면 지워집니다.</p>
+
+  <h2>5. 이용자의 권리</h2>
+  <p>이용자는 언제든 개인정보 열람·정정·삭제·처리정지를 요구할 수 있습니다. 운영자가 서버에 보관하는 생년월일 정보는 없으며, 그 밖의 요청은 아래 연락처로 보내 주시면 지체 없이 처리합니다.</p>
+
+  <h2>6. 만 14세 미만 아동</h2>
+  <p>서비스는 만 14세 미만 아동을 대상으로 하지 않습니다.</p>
+
+  <h2>7. 개인정보 보호책임자</h2>
+  <p>이름: [이름]<br>연락처: [이메일 주소]</p>
+  <p>개인정보 침해에 대한 신고나 상담은 개인정보침해신고센터(privacy.kisa.or.kr, 국번 없이 118), 개인정보분쟁조정위원회(www.kopico.go.kr, 1833-6972)에 문의할 수 있습니다.</p>
+
+  <h2>8. 서비스 이용 안내</h2>
+  <p>서비스의 사주·궁합·운세 풀이는 재미와 자기 이해를 위한 참고 자료입니다. 건강, 법률, 투자, 진로 등 중요한 결정의 근거로 사용하지 마세요. 궁합 점수는 전통 명리 요소를 가중합한 참고 지표입니다.</p>
+
+  <h2>9. 방침의 변경</h2>
+  <p>이 방침이 바뀌면 시행 7일 전에 서비스 화면에 알립니다.</p>
+</main>
+</body>
+</html>
